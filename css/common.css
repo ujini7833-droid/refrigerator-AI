@@ -1,0 +1,164 @@
+
+/* ==============================
+   Common CSS
+============================== */
+
+@font-face {
+    font-family: "Pretendard";
+    src: url("../assets/fonts/Pretendard-Regular.otf") format("opentype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Pretendard";
+    src: url("../assets/fonts/Pretendard-Medium.otf") format("opentype");
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Pretendard";
+    src: url("../assets/fonts/Pretendard-SemiBold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Pretendard";
+    src: url("../assets/fonts/Pretendard-Bold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 700 900;
+    font-display: swap;
+}
+
+/* 1. Color Variables */
+:root {
+    /* Primary */
+    --color-primary: #F05268;
+    --color-primary-light: #FFF0F2;
+    --color-primary-dark: #DB4057;
+
+    /* Background */
+    --color-background: #F7F7F7;
+    --color-white: #FFFFFF;
+
+    /* Text */
+    --color-text: #222222;
+    --color-text-secondary: #888888;
+    --color-text-light: #BBBBBB;
+
+    /* Status */
+    --color-expiring: #F5A044;
+    --color-expired: #F05268;
+    --color-safe: #78B98A;
+
+    /* Border */
+    --color-border: #EEEEEE;
+
+    /* 2. Border Radius */
+    --radius-small: 10px;
+    --radius-medium: 18px;
+    --radius-large: 28px;
+    --radius-full: 999px;
+
+    /* 3. Shadow */
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.03);
+    --shadow-modal: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    /* 4. Spacing */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+    --spacing-section: 40px;
+
+    /* 5. Font */
+    --font-main: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+
+    /* 6. Transition */
+    --transition-fast: 0.2s ease;
+}
+
+
+/* ==============================
+   Base Style
+============================== */
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    letter-spacing: -0.02em;
+}
+
+
+/* ==============================
+   Common Button
+============================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+
+    border-radius: var(--radius-full);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: var(--transition-fast);
+}
+
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    opacity: 0.8;
+}
+
+
+/* ==============================
+   Common Input
+============================== */
+
+.input {
+    width: 100%;
+    padding: 13px 16px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    background-color: var(--color-white);
+
+    font-size: 14px;
+
+    transition: var(--transition-fast);
+}
+
+.input:focus {
+    border-color: var(--color-primary);
+}
+
+.input::placeholder {
+    color: var(--color-text-light);
+}

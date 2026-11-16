@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Refrigerator</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/reset.css?v=7">
+    <link rel="stylesheet" href="./css/common.css?v=7">
+    <link rel="stylesheet" href="./css/style.css?v=7">
+
+    <!-- Local Lucide icon library -->
+    <script src="./assets/vendor/lucide.min.js"></script>
+
+    <!-- JavaScript -->
+    <script type="module" src="./js/main.js?v=5"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <div class="brand-title" role="heading" aria-level="1"><i data-lucide="refrigerator" aria-hidden="true"></i> My Refrigerator</div>
+        </div>
+
+        <button class="header-menu-btn" id="menu-btn" aria-label="메뉴 열기" aria-controls="side-menu" aria-expanded="false">
+            <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+    </header>
+
+
+    <!-- Main -->
+    <main class="main-container">
+
+        <!-- Dashboard -->
+        <section class="dashboard" id="dashboard">
+            <div class="dashboard-title">
+                <div class="dashboard-heading" role="heading" aria-level="2">My Fridge</div>
+                <p>오늘은 어떤 재료를 먼저 사용해 볼까요?</p>
+            </div>
+
+            <div class="dashboard-info">
+                <div class="info-item">
+                    <span class="info-label">전체 식재료</span>
+                    <strong id="total-count">0개</strong>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">유통기한 임박 (3일 이내)</span>
+                    <strong id="expiring-count">0개</strong>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">유통기한 초과</span>
+                    <strong id="expired-count">0개</strong>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Ingredient Section -->
+        <section class="ingredient-section" id="ingredient-section">
+
+            <!-- Section Header -->
+            <div class="section-header">
+                <div>
+                    <div class="section-heading" role="heading" aria-level="2">나의 식재료</div>
+                    <p>보관 중인 식재료를 확인해 보세요.</p>
+                </div>
+            </div>
+
+
+            <!-- Search -->
+            <div class="search-container">
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="식재료 이름을 검색해 보세요."
+                    aria-label="식재료 검색"
+                >
+            </div>
+
+
+            <!-- Filters -->
+            <div class="filter-container">
+
+                <div class="storage-filter">
+                    <button
+                        class="filter-btn active"
+                        data-storage="all"
+                    >
+                        전체
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-storage="fridge"
+                    >
+                        냉장
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-storage="freezer"
+                    >
+                        냉동
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-storage="room"
+                    >
+                        실온
+                    </button>
+                </div>
+
+                <select id="category-filter" aria-label="카테고리 필터">
+                    <option value="all">전체 카테고리</option>
+                    <option value="vegetable">채소</option>
+                    <option value="fruit">과일</option>
+                    <option value="meat">육류</option>
+                    <option value="seafood">해산물</option>
+                    <option value="dairy">유제품</option>
+                    <option value="etc">기타</option>
+                </select>
+
+                <select id="sort-filter" aria-label="정렬 기준">
+                    <option value="expiry">유통기한 임박순</option>
+                    <option value="latest">최근 등록순</option>
+                    <option value="name">이름순</option>
+                </select>
+
+            </div>
+
+
+            <!-- Ingredient List -->
+            <div
+                id="ingredient-list"
+                class="ingredient-list"
+            >
+                <div class="empty-message">
+                    <span><i data-lucide="leaf" aria-hidden="true"></i></span>
+                    <div class="empty-heading" role="heading" aria-level="3">아직 등록된 식재료가 없어요.</div>
+                    <p>식재료를 등록하고 냉장고를 관리해 보세요!</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Side Menu -->
+    <div class="side-menu-overlay" id="side-menu-overlay" aria-hidden="true">
+        <aside class="side-menu" id="side-menu" role="dialog" aria-modal="true" aria-label="사이드 메뉴" tabindex="-1">
+            <div class="side-menu-header">
+                <div class="side-menu-title" role="heading" aria-level="2">메뉴</div>
+                <button type="button" class="side-menu-close" id="close-menu-btn" aria-label="메뉴 닫기">
+                    <i data-lucide="x" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <nav class="side-menu-nav" aria-label="페이지 바로가기">
+                <a href="#dashboard" class="side-menu-link">
+                    <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                    <span>대시보드</span>
+                </a>
+                <a href="#ingredient-section" class="side-menu-link">
+                    <i data-lucide="carrot" aria-hidden="true"></i>
+                    <span>나의 식재료</span>
+                </a>
+            </nav>
+
+            <button type="button" class="side-menu-add" id="menu-add-ingredient">
+                <i data-lucide="plus" aria-hidden="true"></i>
+                <span>식재료 등록</span>
+            </button>
+        </aside>
+    </div>
+
+
+    <!-- Floating Add Button -->
+    <button
+        type="button"
+        id="add-ingredient-btn"
+        class="floating-button"
+        aria-label="식재료 등록"
+    >
+        +
+    </button>
+
+
+    <!-- Ingredient Modal -->
+    <div
+        id="ingredient-modal"
+        class="modal hidden"
+        aria-hidden="true"
+    >
+
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div id="modal-title" class="modal-title" role="heading" aria-level="2">식재료 등록</div>
+
+                <button
+                    type="button"
+                    id="close-modal-btn"
+                    aria-label="모달 닫기"
+                >
+                    <i data-lucide="x" aria-hidden="true"></i>
+                </button>
+            </div>
+
+
+            <!-- Ingredient Form -->
+            <form id="ingredient-form">
+
+                <input
+                    type="hidden"
+                    id="ingredient-id"
+                >
+
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="ingredient-name">
+                        식재료 이름
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ingredient-name"
+                        placeholder="예: 양파"
+                        required
+                    >
+                </div>
+
+
+                <!-- Category -->
+                <div class="form-group">
+                    <label for="ingredient-category">
+                        카테고리
+                    </label>
+
+                    <select
+                        id="ingredient-category"
+                        required
+                    >
+                        <option value="">선택해 주세요</option>
+                        <option value="vegetable">채소</option>
+                        <option value="fruit">과일</option>
+                        <option value="meat">육류</option>
+                        <option value="seafood">해산물</option>
+                        <option value="dairy">유제품</option>
+                        <option value="etc">기타</option>
+                    </select>
+                </div>
+
+
+                <!-- Quantity -->
+                <div class="form-group">
+                    <label for="ingredient-quantity">
+                        수량
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ingredient-quantity"
+                        min="1"
+                        placeholder="수량을 입력해 주세요."
+                        required
+                    >
+                </div>
+
+
+                <!-- Expiry Date -->
+                <div class="form-group">
+                    <label for="ingredient-expiry">
+                        유통기한
+                    </label>
+
+                    <input
+                        type="date"
+                        id="ingredient-expiry"
+                        required
+                    >
+                </div>
+
+
+                <!-- Storage -->
+                <div class="form-group">
+                    <label for="ingredient-storage">
+                        보관 위치
+                    </label>
+
+                    <select
+                        id="ingredient-storage"
+                        required
+                    >
+                        <option value="">선택해 주세요</option>
+                        <option value="fridge">냉장</option>
+                        <option value="freezer">냉동</option>
+                        <option value="room">실온</option>
+                    </select>
+                </div>
+
+
+                <!-- Form Buttons -->
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancel-btn"
+                    >
+                        취소
+                    </button>
+
+                    <button
+                        type="submit"
+                        id="submit-btn"
+                    >
+                        등록하기
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
