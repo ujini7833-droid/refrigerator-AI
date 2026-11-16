@@ -50,8 +50,10 @@ python3 -m http.server 8000
 ├── js/
 │   ├── components/  # 식재료 카드, 모달, 토스트
 │   ├── data/        # localStorage 데이터 처리
+│   ├── events/      # 식재료, 필터, 메뉴 이벤트
 │   ├── utils/       # 날짜, 검색·필터, 입력값 검증
-│   └── main.js      # 앱 초기화와 이벤트 처리
+│   ├── pages/       # 화면 데이터와 렌더링
+│   └── main.js      # 앱 초기화와 모듈 연결
 └── index.html
 ```
 
