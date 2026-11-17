@@ -4,7 +4,7 @@
 ============================== */
 
 @font-face {
-    font-family: "Pretendard";
+    font-family: "Pretendard-Regular";
     src: url("../assets/fonts/Pretendard-Regular.otf") format("opentype");
     font-style: normal;
     font-weight: 400;
@@ -12,7 +12,7 @@
 }
 
 @font-face {
-    font-family: "Pretendard";
+    font-family: "Pretendard-Medium";
     src: url("../assets/fonts/Pretendard-Medium.otf") format("opentype");
     font-style: normal;
     font-weight: 500;
@@ -20,7 +20,7 @@
 }
 
 @font-face {
-    font-family: "Pretendard";
+    font-family: "Pretendard-SemiBold";
     src: url("../assets/fonts/Pretendard-SemiBold.otf") format("opentype");
     font-style: normal;
     font-weight: 600;
@@ -28,10 +28,10 @@
 }
 
 @font-face {
-    font-family: "Pretendard";
+    font-family: "Pretendard-Bold";
     src: url("../assets/fonts/Pretendard-Bold.otf") format("opentype");
     font-style: normal;
-    font-weight: 700 900;
+    font-weight: 700;
     font-display: swap;
 }
 
@@ -76,7 +76,7 @@
     --spacing-section: 40px;
 
     /* 5. Font */
-    --font-main: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    --font-main: "Pretendard-Regular", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
 
     /* 6. Transition */
     --transition-fast: 0.2s ease;
@@ -91,6 +91,7 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     font-family: var(--font-main);
+    font-weight: 400;
     letter-spacing: -0.02em;
 }
 
@@ -109,6 +110,7 @@ body {
     border-radius: var(--radius-full);
 
     font-size: 14px;
+    font-family: "Pretendard-SemiBold", sans-serif;
     font-weight: 600;
 
     transition: var(--transition-fast);
