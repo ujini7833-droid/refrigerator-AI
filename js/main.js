@@ -3,6 +3,7 @@ import { bindIngredientEvents } from "./events/ingredient-events.js";
 import { bindMenuEvents } from "./events/menu-events.js";
 import { openIngredientModal } from "./components/modal.js?v=5";
 import { createHomePage } from "./pages/home.js";
+import { startProductTour } from "./components/product-tour.js?v=5";
 
 function init() {
     const elements = {
@@ -22,7 +23,8 @@ function init() {
         menuOverlay: document.querySelector("#side-menu-overlay"),
         menuPanel: document.querySelector("#side-menu"),
         menuCloseButton: document.querySelector("#close-menu-btn"),
-        menuAddButton: document.querySelector("#menu-add-ingredient")
+        menuAddButton: document.querySelector("#menu-add-ingredient"),
+        tourReplayButton: document.querySelector("#tour-replay-btn")
     };
 
     if (Object.values(elements).some(element => !element)) {
@@ -42,7 +44,13 @@ function init() {
         addButton: elements.menuAddButton
     }, openIngredientModal);
 
+    elements.tourReplayButton.addEventListener("click", () => {
+        elements.menuCloseButton.click();
+        startProductTour({ force: true });
+    });
+
     document.addEventListener("ingredients-updated", homePage.refresh);
+    startProductTour();
 }
 
 if (document.readyState === "loading") {
