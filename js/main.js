@@ -5,6 +5,17 @@ import { openIngredientModal } from "./components/modal.js?v=5";
 import { createHomePage } from "./pages/home.js";
 import { startProductTour } from "./components/product-tour.js?v=5";
 
+function scheduleMidnightRefresh(refresh) {
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 0, 0);
+
+    setTimeout(() => {
+        refresh();
+        scheduleMidnightRefresh(refresh);
+    }, nextMidnight.getTime() - now.getTime());
+}
+
 function init() {
     const elements = {
         ingredientList: document.querySelector("#ingredient-list"),
@@ -33,6 +44,10 @@ function init() {
     }
 
     const homePage = createHomePage(elements);
+    scheduleMidnightRefresh(homePage.refresh);
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) homePage.refresh();
+    });
 
     bindIngredientEvents(elements, homePage.refresh);
     bindFilterEvents(elements, homePage.setFilters);
